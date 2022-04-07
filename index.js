@@ -69,6 +69,19 @@ app.patch('/comments/:id', (req, res) => {
     res.redirect('/comments');
 })
 
+app.get('/comments/:id/delete', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(c => c.id === id);
+    res.render('comments/delete', { comment });
+})
+
+app.delete('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const foundComment = comments.find(c => c.id === id);
+    comments.splice(commentIndex, 1);
+    res.redirect('/comments');
+})
+
 app.get('/tacos', (req, res) => {
     res.send('GET /tacos response')
 })
